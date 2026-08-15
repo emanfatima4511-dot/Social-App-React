@@ -33,7 +33,7 @@ export default function CommentSection({ postId }) {
 
   return (
     <div className="mt-6">
-      <h3 className="font-semibold mb-3 dark:text-gray-100">
+      <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">
         {comments.length} {comments.length === 1 ? 'Comment' : 'Comments'}
       </h3>
 
@@ -43,21 +43,21 @@ export default function CommentSection({ postId }) {
           const isOwnComment = comment.authorId === currentUser?.id
 
           return (
-            <div key={comment.id} className="flex gap-2">
+            <div key={comment.id} className="flex gap-2.5">
               <Link to={`/profile/${author?.id}`}>
                 <Avatar src={author?.avatar} name={author?.name} size="sm" />
               </Link>
-              <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2">
+              <div className="flex-1 bg-gray-50 dark:bg-gray-700/60 border border-gray-100 dark:border-gray-700 rounded-xl px-3 py-2">
                 <div className="flex items-center justify-between">
                   <Link
                     to={`/profile/${author?.id}`}
-                    className="text-sm font-medium hover:underline"
+                    className="text-sm font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
                     {author?.name || 'Unknown user'}
                   </Link>
                   <span className="text-xs text-gray-500">{timeAgo(comment.createdAt)}</span>
                 </div>
-                <p className="text-sm text-gray-800 dark:text-gray-200 mt-0.5">{comment.text}</p>
+                <p className="text-sm text-gray-800 dark:text-gray-200 mt-0.5 leading-relaxed">{comment.text}</p>
 
                 {isOwnComment && (
                   <div className="mt-1">
@@ -80,7 +80,7 @@ export default function CommentSection({ postId }) {
                     ) : (
                       <button
                         onClick={() => setConfirmingDeleteId(comment.id)}
-                        className="text-xs text-red-600 hover:underline"
+                        className="text-xs text-red-500 hover:text-red-600 font-medium transition-colors"
                       >
                         Delete
                       </button>
@@ -99,9 +99,9 @@ export default function CommentSection({ postId }) {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Write a comment..."
-            className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
           />
-          <Button type="submit">Post</Button>
+          <Button type="submit" className="sm:w-auto w-full">Post</Button>
         </form>
       ) : (
         <p className="text-sm text-gray-500">

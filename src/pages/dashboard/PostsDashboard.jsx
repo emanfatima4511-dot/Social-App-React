@@ -48,10 +48,10 @@ export default function PostsDashboard() {
   if (posts.length === 0) {
     return (
       <div>
-        <h1 className="text-lg font-bold mb-4 sm:text-xl md:text-2xl">My Posts</h1>
-        <p className="text-gray-600">
+        <h1 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">My Posts</h1>
+        <p className="text-gray-600 dark:text-gray-400">
           You haven't created any posts yet.{' '}
-          <Link to="/dashboard/create" className="text-blue-600 hover:underline">
+          <Link to="/dashboard/create" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
             Create your first post!
           </Link>
         </p>
@@ -61,13 +61,13 @@ export default function PostsDashboard() {
 
   return (
     <div>
-      <h1 className="text-lg font-bold mb-4 sm:text-xl md:text-2xl">My Posts</h1>
+      <h1 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">My Posts</h1>
 
       <div className="flex flex-col gap-3">
         {posts.map((post) => (
           <div
             key={post.id}
-            className="border rounded-lg p-3 flex flex-col gap-3 dark:border-gray-700 dark:bg-gray-800 sm:p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+            className="border border-gray-200 dark:border-gray-700 rounded-xl p-3 flex flex-col gap-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow sm:p-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
           >
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
@@ -120,7 +120,7 @@ export default function PostsDashboard() {
         onClose={() => setDeleteTarget(null)}
         title="Delete this post?"
       >
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
           This action cannot be undone. Are you sure you want to delete this post?
         </p>
         <div className="flex gap-3 justify-end">

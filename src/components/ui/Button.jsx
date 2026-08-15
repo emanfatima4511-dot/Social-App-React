@@ -1,10 +1,14 @@
 import clsx from 'clsx'
 
 const variantStyles = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600',
-  secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600',
-  danger: 'bg-red-600 text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600',
-  ghost: 'bg-transparent text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-gray-800',
+  primary:
+    'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/25 hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:shadow-blue-600/30 focus-visible:ring-blue-500',
+  secondary:
+    'bg-gray-100 text-gray-800 border border-gray-200 shadow-sm hover:bg-gray-200 hover:shadow-md dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-600 focus-visible:ring-gray-400',
+  danger:
+    'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md shadow-red-600/25 hover:from-red-700 hover:to-rose-700 hover:shadow-lg hover:shadow-red-600/30 focus-visible:ring-red-500',
+  ghost:
+    'bg-transparent text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-gray-800 focus-visible:ring-blue-500',
 }
 
 const sizeStyles = {
@@ -55,8 +59,9 @@ export default function Button({
       onClick={onClick}
       disabled={disabled || isLoading}
       className={clsx(
-        'rounded-md font-medium transition-colors inline-flex items-center justify-center gap-2',
-        'disabled:opacity-50 disabled:cursor-not-allowed',
+        'rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center gap-2',
+        'active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900',
         variantStyles[variant],
         sizeStyles[size],
         className

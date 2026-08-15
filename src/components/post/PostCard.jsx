@@ -6,6 +6,42 @@ import { useComments } from '../../hooks/useComments'
 import { timeAgo } from '../../utils/helpers'
 import Avatar from '../ui/Avatar'
 
+function HeartIcon({ filled }) {
+  return (
+    <svg
+      className="w-5 h-5"
+      viewBox="0 0 24 24"
+      fill={filled ? 'currentColor' : 'none'}
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+      />
+    </svg>
+  )
+}
+
+function CommentIcon() {
+  return (
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+      />
+    </svg>
+  )
+}
+
 export default function PostCard({ post }) {
   const navigate = useNavigate()
   const { currentUser, isAuthenticated } = useAuth()
@@ -42,7 +78,7 @@ export default function PostCard({ post }) {
   return (
     <div
       onClick={goToPost}
-      className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:shadow-md transition-shadow cursor-pointer sm:p-4 md:p-5"
+      className="group border border-gray-200 dark:border-gray-700 rounded-xl p-3 mb-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm hover:shadow-xl hover:shadow-gray-200/60 dark:hover:shadow-black/30 hover:border-blue-200 dark:hover:border-blue-900 transition-all duration-200 cursor-pointer sm:p-4 md:p-5"
     >
       {/* Author row */}
       <div
@@ -55,7 +91,7 @@ export default function PostCard({ post }) {
         <div>
           <Link
             to={`/profile/${author?.id}`}
-            className="font-medium hover:underline"
+            className="font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             {author?.name || 'Unknown user'}
           </Link>
@@ -64,7 +100,7 @@ export default function PostCard({ post }) {
       </div>
 
       {/* Description */}
-      <p className="text-gray-800 dark:text-gray-200 mb-3 whitespace-pre-wrap">
+      <p className="text-gray-800 dark:text-gray-200 mb-3 whitespace-pre-wrap leading-relaxed">
         {post.description}
       </p>
 
@@ -73,25 +109,31 @@ export default function PostCard({ post }) {
         <img
           src={post.image}
           alt="Post"
-          className="w-full max-h-96 object-cover rounded-md mb-3"
+          className="w-full max-h-96 object-cover rounded-lg mb-3"
         />
       )}
 
       {/* Actions */}
-      <div className="flex items-center gap-4 text-sm text-gray-600 border-t pt-3 sm:gap-6">
+      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-3">
         <button
           onClick={handleLikeClick}
-          className={`flex items-center gap-1 hover:text-blue-600 ${
-            liked ? 'text-blue-600 font-medium' : ''
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 hover:bg-blue-50 dark:hover:bg-gray-700 ${
+            liked
+              ? 'text-blue-600 font-medium'
+              : 'hover:text-blue-600'
           }`}
         >
-          {liked ? '♥' : '♡'} {likeCount} {likeCount === 1 ? 'Like' : 'Likes'}
+          <span className={`${liked ? 'scale-110' : ''} transition-transform duration-200`}>
+            <HeartIcon filled={liked} />
+          </span>
+          {likeCount} {likeCount === 1 ? 'Like' : 'Likes'}
         </button>
         <button
           onClick={handleCommentClick}
-          className="flex items-center gap-1 hover:text-blue-600"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600"
         >
-          💬 {commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}
+          <CommentIcon />
+          {commentCount} {commentCount === 1 ? 'Comment' : 'Comments'}
         </button>
       </div>
     </div>
